@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="/stylesheets/landingpage1.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <title>
+    Ride-Sharing application
+  </title>
+  <!-- <% include ('layouts/Navbar.ejs') %> -->
+</head>
+
+<body>
+  <!--Main Start-->
+  <div class="main">
+    <!--Navbar Start-->
+    <nav class="navbar  navbar-expand-lg navbar-dark bg-transparent" style="font-family: 'Luckiest Guy', cursive;">
+      <a class="navbar-brand" href="#" style="padding-left: 150px; font-size: 40px; ">Ride-Sharing App</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav" style="margin-left: 35%; font-size: 20px;">
+          <a class="nav-item nav-link active" href="/" id="navicon">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" href="/about" id="navicon">About Messi</a>
+        </div>
+      </div>
+    </nav>
+    <!--Navbar End-->
+
+    <% if(addDestiny==false){ %>
+      <% if(message !==undefined){%>
+        <h3 style="display: flex ; width: 100vw ; justify-content: center; color: white;"><b>
+            <%= message %>
+          </b></h3>
+        <% } %>
+          <form style="margin: 5% 30%;" action="/shareRide" method="POST">
+            <div class="form-group">
+              <label for="Name">Name</label>
+              <input required type="text" class="form-control" id="Name" aria-describedby="emailHelp" placeholder="Enter name"
+                name="Name">
+            </div>
+            <div class="form-group">
+              <label for="Gender">Gender</label>
+              <input required type="text" class="form-control" id="Gender" aria-describedby="emailHelp"
+                placeholder="Enter Gender" name="Gender">
+            </div>
+            <div class="form-group">
+              <label for="Age">Age</label>
+              <input required type="Number" class="form-control" id="Age" aria-describedby="emailHelp" name="Age"
+                placeholder="Enter Age">
+            </div>
+            <div class="form-group">
+              <label for="VehicalName">Vehical Name</label>
+              <input required type="text" class="form-control" id="VehicalName" aria-describedby="emailHelp" name="VehicalName"
+                placeholder="Enter Vehical Name">
+            </div>
+            <div class="form-group">
+              <label for="VehicalNumber">Vehical Number</label>
+              <input required type="text" class="form-control" id="VehicalNumber" aria-describedby="emailHelp"
+                name="VehicalNumber" placeholder="Enter Vehical Number">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <br>
+            <br>
+            <br>
+            <h3>Already Registed?</h3>
+            <button type="submit" class="btn btn-primary"><a style="text-decoration: none; color: white;" href="/shareRide/addJourney">Click to add journey
+                details</a></button>
+          </form>
+          <% } %>
+            <% if(addDestiny==true){ %>
+              <h3 style="display: flex ; width: 100vw ; justify-content: center; color: white; margin-top: 4%;">
+                Please enter the origin , destination , available seats along with the car number
+                <% if(message !==undefined){%>
+                  <h3 style="display: flex ; width: 100vw ; justify-content: center; color: white;"><b>
+                      <%= message %>
+                    </b></h3>
+                  <% } %>
+              </h3>
+              <form style="margin: 2% 30%;" action="/shareRide/addJourney" method="POST">
+                <div class="form-group">
+                  <label for="Name">Name</label>
+                  <input required type="text" class="form-control" id="Name" aria-describedby="emailHelp"
+                    placeholder="Enter name" name="Name">
+                </div>
+                <div class="form-group">
+                  <label for="Origin">Origin</label>
+                  <input required type="text" class="form-control" id="Origin" aria-describedby="emailHelp"
+                    placeholder="Enter Origin" name="Origin">
+                </div>
+                <div class="form-group">
+                  <label for="Destination">Destination</label>
+                  <input required type="text" class="form-control" id="Destination" aria-describedby="emailHelp"
+                    placeholder="Enter Destination" name="Destination">
+                </div>
+                <div class="form-group">
+                  <label for="Seats">available seats</label>
+                  <input required type="Number" class="form-control" id="Seats" aria-describedby="emailHelp" name="Seats"
+                    placeholder="Enter Seats">
+                </div>
+                <div class="form-group">
+                  <label for="VehicalName">Vehical Name</label>
+                  <input required type="text" class="form-control" id="VehicalName" aria-describedby="emailHelp"
+                    name="VehicalName" placeholder="Enter Vehical Name">
+                </div>
+                <div class="form-group">
+                  <label for="VehicalNumber">Vehical Number</label>
+                  <input required type="text" class="form-control" id="VehicalNumber" aria-describedby="emailHelp"
+                    name="VehicalNumber" placeholder="Enter Vehical Number">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <br>
+                <br>
+                <br>
+                <h3>Haven't Registed?</h3>
+                <button type="submit" class="btn btn-primary"><a style="text-decoration: none; color: white;" href="/shareRide">Click to add New User</a></button>
+              </form>
+              <% } %>
+  </div>
+</body>
+
+</html>

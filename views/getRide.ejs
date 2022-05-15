@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="/stylesheets/landingpage1.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <title>
+    Ride-Sharing application
+  </title>
+  <!-- <% include ('layouts/Navbar.ejs') %> -->
+</head>
+
+<body>
+  <!--Main Start-->
+  <div class="main">
+    <!--Navbar Start-->
+    <nav class="navbar  navbar-expand-lg navbar-dark bg-transparent" style="font-family: 'Luckiest Guy', cursive;">
+      <a class="navbar-brand" href="#" style="padding-left: 150px; font-size: 40px; ">Ride-Sharing App</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav" style="margin-left: 35%; font-size: 20px;">
+          <a class="nav-item nav-link active" href="/" id="navicon">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" href="/about" id="navicon">About Messi</a>
+        </div>
+      </div>
+    </nav>
+    <!--Navbar End-->
+    <% if(message==="No User Found" ){%>
+      <h3 style="display: flex ; width: 100vw ; justify-content: center; color: white;  margin-top: 3%;"><b>
+          No Rides available!!
+        </b></h3>
+      <button class="btn btn-primary"><a href="/getRide">Book another Ride</a></button>
+      <% } else if(message==="Ride is confirmed" ) {%>
+        <h3 style="display: flex ; width: 100vw ; justify-content: center; color: white;  margin-top: 3%;"><b>
+            Your Ride has been booked!!
+          </b></h3>
+        <% } else if(message===null) {%>
+          <form style="margin: 5% 30%;" action="/getRide" method="POST">
+            <div class="form-group">
+              <label for="Name">Name</label>
+              <input required type="text" class="form-control" id="Name" aria-describedby="emailHelp"
+                placeholder="Enter Name" name="Name">
+            </div>
+            <div class="form-group">
+              <label for="Origin">Origin</label>
+              <input required type="text" class="form-control" id="Origin" aria-describedby="emailHelp"
+                placeholder="Enter Origin" name="Origin">
+            </div>
+            <div class="form-group">
+              <label for="Destination">Destination</label>
+              <input required type="text" class="form-control" id="Destination" aria-describedby="emailHelp"
+                name="Destination" placeholder="Enter Destination">
+            </div>
+            <div class="form-group">
+              <label for="Seats">Seats</label>
+              <input required type="text" class="form-control" id="Seats" aria-describedby="emailHelp" name="Seats"
+                placeholder="Enter No Seats">
+            </div>
+            <div class="form-group">
+              <label for="PrefVehical">Prefered Vehical or Most Vacant</label>
+              <input required type="text" class="form-control" id="PrefVehical" aria-describedby="emailHelp"
+                name="PrefVehical" placeholder="Enter Vehical Name / Most Vacant">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          <% } else { %>
+            <% message.map( (m,index)=> { %>
+              <form action="/getRide/cofirmRide"
+                style="display: flex ; width: 80vw ;color: white; justify-content: space-evenly; margin-top:5px;"
+                method="POST">
+
+                <option style="font-size:xx-large;">
+                  <%= index + 1 %> : <%= m.Name %>
+                      <%= m.VehicalName %>
+                        <%= m.VehicalNumber %>
+                          <%= m.Seats %>
+                </option>
+                <input type="hidden" name="VehicalNumber" value="<%= m %>">
+                <button type="submit" class="btn btn-primary">Confirm Ride</button>
+              </form>
+              <% }) %>
+                <button class="btn btn-primary"
+                  style="display: flex ; width: 10vw ;color: white; justify-content: center; margin-left:40%"><a
+                    style="text-decoration: none; color: white;" href="/getRide">Book another Ride</a></button>
+                <% } %>
+  </div>
+</body>
+
+</html>
